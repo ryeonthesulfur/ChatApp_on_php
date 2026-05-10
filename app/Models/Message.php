@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Message extends Model
+{
+    protected $fillable = ['room_id', 'user_id', 'content'];
+    
+    //user とのアソシエーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    //room とのアソシエーション
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+}
