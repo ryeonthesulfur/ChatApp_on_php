@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Room extends Model
 {
-        protected $fillable = ['name'];
+    // マスアサインメント保護の設定（Rails の strong parameters に相当）
+    protected $fillable = ['name'];
 
     //messages とのアソシエーション
     public function messages()
