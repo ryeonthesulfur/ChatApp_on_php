@@ -11,13 +11,11 @@ Route::get('/', function () {
         : redirect()->route('login');
 });
 
+
 Route::get('/rooms', [RoomController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('rooms.index');
 
-Route::get('/rooms/{room}/messages', [MessageController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('messages.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
