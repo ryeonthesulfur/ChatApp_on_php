@@ -1,25 +1,11 @@
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useRef, useState } from 'react';
 
-export default function DeleteUserForm({ className = '' }) {
+export default function DeleteUserForm() {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
-    const {
-        data,
-        setData,
-        delete: destroy,
-        processing,
-        reset,
-        errors,
-        clearErrors,
-    } = useForm({
+    const { data, setData, delete: destroy, processing, reset, errors, clearErrors } = useForm({
         password: '',
     });
 
@@ -40,81 +26,76 @@ export default function DeleteUserForm({ className = '' }) {
 
     const closeModal = () => {
         setConfirmingUserDeletion(false);
-
         clearErrors();
         reset();
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">
+        <section>
+            <h3>Delete Account</h3>
+            <p>アカウントを削除すると、すべてのデータが完全に削除されます。</p>
+
+            <div className="actions">
+                <button
+                    onClick={confirmUserDeletion}
+                    className="btn"
+                    style={{ backgroundColor: '#d65f4c', color: '#fff', cursor: 'pointer' }}
+                >
                     Delete Account
-                </h2>
+                </button>
+            </div>
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Before deleting your account,
-                    please download any data or information that you wish to
-                    retain.
-                </p>
-            </header>
+            {confirmingUserDeletion && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
+                    alignItems: 'center', justifyContent: 'center', zIndex: 1000
+                }}>
+                    <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '5px', width: '500px' }}>
+                        <h3>本当にアカウントを削除しますか？</h3>
+                        <p>削除を確認するためにパスワードを入力してください。</p>
 
-            <DangerButton onClick={confirmUserDeletion}>
-                Delete Account
-            </DangerButton>
+                        {errors.password && (
+                            <div id="error_explanation">
+                                <ul><li>{errors.password}</li></ul>
+                            </div>
+                        )}
 
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
-                        Are you sure you want to delete your account?
-                    </h2>
-
-                    <p className="mt-1 text-sm text-gray-600">
-                        Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Please enter your
-                        password to confirm you would like to permanently delete
-                        your account.
-                    </p>
-
-                    <div className="mt-6">
-                        <InputLabel
-                            htmlFor="password"
-                            value="Password"
-                            className="sr-only"
-                        />
-
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) =>
-                                setData('password', e.target.value)
-                            }
-                            className="mt-1 block w-3/4"
-                            isFocused
-                            placeholder="Password"
-                        />
-
-                        <InputError
-                            message={errors.password}
-                            className="mt-2"
-                        />
+                        <form onSubmit={deleteUser}>
+                            <div className="field">
+                                <div className="field-input">
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        ref={passwordInput}
+                                        value={data.password}
+                                        placeholder="Password"
+                                        autoFocus
+                                        onChange={(e) => setData('password', e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                                <button
+                                    type="button"
+                                    onClick={closeModal}
+                                    className="btn"
+                                    style={{ backgroundColor: '#ccc', color: '#fff', cursor: 'pointer' }}
+                                >
+                                    Cancel
+                                </button>
+                                <input
+                                    type="submit"
+                                    value="Delete Account"
+                                    className="btn"
+                                    style={{ backgroundColor: '#d65f4c', color: '#fff' }}
+                                    disabled={processing}
+                                />
+                            </div>
+                        </form>
                     </div>
-
-                    <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>
-                            Cancel
-                        </SecondaryButton>
-
-                        <DangerButton className="ms-3" disabled={processing}>
-                            Delete Account
-                        </DangerButton>
-                    </div>
-                </form>
-            </Modal>
+                </div>
+            )}
         </section>
     );
 }
