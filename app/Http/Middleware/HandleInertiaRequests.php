@@ -34,6 +34,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'rooms' => $request->user() ? $request->user()->rooms : [],
         ];
     }
 }

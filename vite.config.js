@@ -1,13 +1,11 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import react from '@vitejs/plugin-react-oxc';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.jsx',
+            input: ['resources/css/app.css', 'resources/css/user.css', 'resources/css/room.css', 'resources/css/messages.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        react(),
     ],
 });
