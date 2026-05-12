@@ -1,16 +1,10 @@
-import Checkbox from '@/Components/Checkbox';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import '../../../css/user.css';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        remember: false,
     });
 
     const submit = (e) => {
@@ -22,79 +16,81 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <GuestLayout>
+        <div className="account-page" id="account-page">
             <Head title="Log in" />
-
-            {status && (
-                <div className="mb-4 text-sm font-medium text-green-600">
-                    {status}
-                </div>
-            )}
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4 block">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) =>
-                                setData('remember', e.target.checked)
-                            }
-                        />
-                        <span className="ms-2 text-sm text-gray-600">
-                            Remember me
-                        </span>
-                    </label>
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            Forgot your password?
+            <div className="account-page__inner clearfix">
+                <div className="account-page__inner--left account-page__header">
+                    <h2>Log in</h2>
+                    <h5>登録しているユーザーでログイン</h5>
+                    <div style={{ marginTop: '20px' }}>
+                        <Link href={route('register')} className="btn" style={{ display: 'block', marginBottom: '10px', width: 'fit-content' }}>
+                            Sign up
                         </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+                        {canResetPassword && (
+                            <Link href={route('password.request')} className="btn" style={{ display: 'block', width: 'fit-content' }}>
+                                Forgot your password?
+                            </Link>
+                        )}
+                    </div>
                 </div>
-            </form>
-        </GuestLayout>
+                <div className="account-page__inner--right user-form">
+                    {Object.keys(errors).length > 0 && (
+                        <div id="error_explanation">
+                            <h2>{Object.keys(errors).length}つのエラーが見つかりました</h2>
+                            <ul>
+                                {Object.values(errors).map((error, i) => (
+                                    <li key={i}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <form onSubmit={submit}>
+                        <div className="field">
+                            <div className="field-label">
+                                <label htmlFor="email">Email</label>
+                            </div>
+                            <div className="field-input">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={data.email}
+                                    autoFocus
+                                    onChange={(e) => setData('email', e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="field">
+                            <div className="field-label">
+                                <label htmlFor="password">Password</label>
+                                <i>（英数字6文字以上）</i>
+                            </div>
+                            <div className="field-input">
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    autoComplete="off"
+                                    onChange={(e) => setData('password', e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="actions">
+                            <input
+                                type="submit"
+                                value="Log in"
+                                className="btn"
+                                disabled={processing}
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }

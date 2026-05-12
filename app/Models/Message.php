@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+     // マスアサインメント保護の設定（Rails の strong parameters に相当）
     protected $fillable = ['room_id', 'user_id', 'content'];
     
     //user とのアソシエーション

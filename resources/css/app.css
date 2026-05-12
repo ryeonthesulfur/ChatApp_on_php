@@ -1,3 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ * {
+    box-sizing: border-box;
+ }
+
+
+ 
+
+
+ /*
+
+ ＊＊「*」とは？＊＊
+ 「*」 は、ユニバーサルセレクタ（Universal Selector） と呼ばれるものです。
+ これは「すべての要素」を意味し、HTMLページ上に存在するすべてのHTMLタグ（例: <body>, <div>, <p>, <a> など）を選択します。
+
+したがって、このコードは**「ページ上のすべての要素に box-sizing: border-box; というスタイルを適用する」**という意味になります。
+
+
+＊＊「box-sizing: border-box;」 とは？＊＊
+これは、要素の幅（width）と高さ（height）の計算方法を指定するプロパティです。
+
+デフォルト (content-box): widthとheightはコンテンツ領域のみのサイズを指定します。
+padding（内側の余白）やborder（枠線）の幅は、指定したwidthやheightに追加されます。
+そのため、要素全体の大きさは意図したサイズより大きくなってしまいます。
+
+border-box: widthとheightにpaddingとborderの幅が含まれます。
+例えば width: 200px; と指定した場合、paddingやborderがどれだけあっても、要素全体の幅はきっかり200pxになります。
+この * { box-sizing: border-box; } という設定は、レイアウト計算が直感的になり、
+要素が意図せず親要素からはみ出してしまうといった問題を避けることができるため、
+多くのモダンなWebサイトで最初に記述される、非常によく使われるテクニックです。
+
+*/
+
+
+
+
+/**/
+/**/
+/**/
