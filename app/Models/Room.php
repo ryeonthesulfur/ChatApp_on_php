@@ -10,6 +10,15 @@ class Room extends Model
     // マスアサインメント保護の設定（Rails の strong parameters に相当）
     protected $fillable = ['name'];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($room) {
+            $room->users()->detach();
+            $room->messages()->delete();
+        });
+    }
+
     //messages とのアソシエーション
     public function messages()
     {
