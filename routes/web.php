@@ -17,6 +17,15 @@ Route::get('/rooms', [RoomController::class, 'index'])
     ->name('rooms.index');
 
 
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
+    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+    Route::get('/rooms/{room}/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/rooms/{room}/messages', [MessageController::class, 'store'])->name('messages.store');
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
