@@ -12,10 +12,25 @@ class MessageController extends Controller
     public function index(Room $room)
     {
         return view('messages.index', [
-            'room' => $room, // ここで$roomをそのまま使える
-            'messages' => $room->messages()->with('user')->latest()->get()
-            // 「with('user')」でメッセージに関連するユーザー情報も取得(N+1問題対策)、「latest()」で新しい順に並べ替え、最後に「get()」でクエリを実行して結果を取得
+            'room' => $room,
+            'messages' => $room->messages()->with('user')->oldest()->get()
         ]);
     }
 
+
+    public function store(Request $request, Room $room)
+    {
+        $request->validate([
+            'content' => 'nullable|string|max:1000'
+        ]);
+
+        // ルームに紐づいたメッセージをcreateの配列内で渡してキーバリュー保存
+        $room->messages()->create([
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+            'image' => $request->file('image') ? $request->file('image')->store('images', 'public') : null
+        ]);
+
+        return redirect()->route('messages.index', $room);
+    }
 }

@@ -36,7 +36,7 @@
 /*１．子サイドヘッダー／ユーザー名ボタン（index.html.erb >> _side_bar.html.erbで管理）*/
 .user-name-button {
   color: var(--text-light);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .user-name-button a{
@@ -70,14 +70,17 @@
 }
 
 .room-name {
-  font-size: 24px;
+  font-size: 30px;
   color: #333;
 }
 
 .quit-chat-button {
-  padding: 20px;
+  padding: 15px;
   color: darkred;
   border: 1px solid darkred;
+  cursor: pointer;
+  font-size: 11px;
+  border-radius: 7px;
 }
 
 .quit-chat-button a {
@@ -135,7 +138,7 @@
 }
 
 .room-name {
-  font-size: 18px;
+  font-size: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -221,18 +224,25 @@
   color: var(--user-name-bg);
 }
 
+.message-image {
+  max-width: 500px;
+  height: auto;
+}
+
 /*５．入力フォーム（index.html.erb >> _main_chat.html.erbで管理）*/
 .formInput {
   height: 90px;
   padding: 20px 40px;
   background-color: var(--form-bg);
   display: flex;
+  border-radius: 20px 20px 0 0;
 }
 
 .form {
   background-color: white;
   width: 100%;
   display: flex;
+  border-radius: 15px;
 }
 
 .type-message {
@@ -240,6 +250,7 @@
   padding: 0 0 0 10px;
   background-color: white;
   border: none;
+  border-radius: 15px;
 }
 
 .send-button {
@@ -253,16 +264,32 @@
 
 .form-image {
   font-size: 12px;
-  background-color: lightblue;
+  background-color: rgb(26, 80, 98);
   color: white;
   padding: 12px;
   width: 60px;
   text-align: center;
   margin: 5px 10px;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.3s ease;
+  border-radius: 7px;
+}
+
+.form-image:hover {
+  opacity: 2.0;
 }
 
 .hidden {
   display: none;
+}
+
+.file-name {
+  color: #999;
+  font-size: 12px;
+  align-self: center;
+  width: 30%;
+  text-align: right;
 }
 
 
