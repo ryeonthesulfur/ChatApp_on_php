@@ -33,8 +33,8 @@ class AuthenticationTest extends TestCase
 
         // ログイン済み状態になっているか確認
         $this->assertAuthenticated();
-        // ダッシュボードにリダイレクトされるか確認
-        $response->assertRedirect(route('dashboard', absolute: false));
+        // ルーム一覧にリダイレクトされるか確認
+        $response->assertRedirect(route('rooms.index', absolute: false));
     }
 
     // 間違ったパスワードではログインできないかテスト

@@ -45,8 +45,8 @@ class EmailVerificationTest extends TestCase
         Event::assertDispatched(Verified::class);
         // ユーザーが認証済みになったか確認
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        // ダッシュボードにリダイレクトされるか確認
-        $response->assertRedirect(route('dashboard', absolute: false).'?verified=1');
+        // ルーム一覧にリダイレクトされるか確認
+        $response->assertRedirect(route('rooms.index', absolute: false));
     }
 
     // 不正なハッシュでは認証できないかテスト
