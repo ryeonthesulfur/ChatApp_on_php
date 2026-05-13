@@ -1,0 +1,310 @@
+:root {
+  --side-header-bg: #253141;
+  --side-bar-bg: #2F3E51;
+  --text-light: #FAFAFA;
+  --link-active: deepskyblue;
+  --link-border: lightblue;
+  --main-bg: #ffffff;
+  --chat-view-bg: #FAFAFA;
+  --form-bg: #DDDDDD;
+  --room-text: white;
+  --user-name-bg: #434A54;
+  --time-bg: #999;
+  --send-button-bg: #38AEF0;
+}
+
+/*【全体】（index.html.erbで管理）*/
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+
+/*▼▼▼【ヘッダー】▼▼▼*/
+
+/*１．親サイドヘッダー（index.html.erb >> _side_bar.html.erbで管理）*/
+.side-header {
+  height: 100px;
+  padding: 0 20px;
+  background-color: var(--side-header-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*１．子サイドヘッダー／ユーザー名ボタン（index.html.erb >> _side_bar.html.erbで管理）*/
+.user-name-button {
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+.user-name-button a{
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+/*１．子サイドヘッダー／新規チャットボタン（index.html.erb >> _side_bar.html.erbで管理）*/
+.new-chat-button {
+  padding: 14px;
+  font-size: 10px;
+  color: var(--link-active);
+  border: 1px solid var(--link-border);
+}
+
+.new-chat-button a {
+  color: deepskyblue;
+  text-decoration: none;
+}
+
+/*３．メインヘッダー（index.html.erb >> _main_chat.html.erbで管理）*/
+.main-header {
+  /* widthは親要素(.main-chat)の幅いっぱいに広がるため、指定は不要です。 */
+  /* heightやpaddingなどをここで設定します。 */
+  height: 100px;
+  padding: 0 40px;
+  background-color: var(--main-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.room-name {
+  font-size: 24px;
+  color: #333;
+}
+
+.quit-chat-button {
+  padding: 20px;
+  color: darkred;
+  border: 1px solid darkred;
+}
+
+.quit-chat-button a {
+  color: darkred;
+  text-decoration: none;
+}
+
+
+
+/*▼▼▼【サイドバー】▼▼▼*/
+
+/*サイドバー地盤レイアウト（index.html.erbで管理）*/
+.side-bar {
+  width: 300px;
+  background-color: var(--side-bar-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/*２．チャットルーム一覧（index.html.erb >> _side_bar.html.erbで管理）*/
+.rooms {
+  flex: 1;
+  padding: 0 20px;
+  background-color: var(--side-bar-bg);
+  overflow: scroll;
+}
+
+.logout-button {
+  padding: 20px;
+  background-color: var(--side-bar-bg);
+}
+
+.logout-button button {
+  width: 100%;
+  padding: 10px;
+  color: var(--text-light);
+  background-color: transparent;
+  border: 1px solid var(--text-light);
+  cursor: pointer;
+  font-size: 16px;
+  color: red;
+}
+
+.logout-button button:hover {
+  opacity: 0.8;
+}
+
+.room {
+  padding: 20px 20px 40px 20px;
+}
+
+.room a {
+  color: var(--room-text);
+  text-decoration: none;
+}
+
+.room-name {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room-menu {
+  position: relative;
+}
+
+.room-menu-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.room-menu-dropdown {
+  position: absolute;
+  right: 0;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 100;
+  min-width: 140px;
+}
+
+.room-menu-dropdown button {
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  color: darkred;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+}
+
+.room-menu-dropdown button:hover {
+  background: #f5f5f5;
+}
+
+/*▼▼▼【メインチャット画面】▼▼▼*/
+
+/*メインチャット地盤レイアウト（index.html.erbで管理）*/
+.main-chat {
+  width: calc(100vw - 300px);
+  background-color: var(--main-bg);
+}
+
+/*４．チャット内容表示エリア（index.html.erb >> _main_chat.html.erbで管理）*/
+.chat-view {
+  height: calc(100vh - 100px - 90px);
+  padding: 46px 40px 0;
+  background-color: var(--chat-view-bg);
+  overflow: scroll;
+}
+
+.name-time-and-message {
+  margin-bottom: 40px;
+}
+
+.name-and-time {
+  display: flex;
+  margin: 10px 0 10px 0;
+}
+
+.user-name {
+  font-size: 16px;
+  color: var(--user-name-bg);
+  margin-right: 10px;
+}
+
+
+.time {
+  font-size: 12px;
+  color: var(--time-bg);
+}
+
+.message {
+  font-size: 14px;
+  color: var(--user-name-bg);
+}
+
+/*５．入力フォーム（index.html.erb >> _main_chat.html.erbで管理）*/
+.formInput {
+  height: 90px;
+  padding: 20px 40px;
+  background-color: var(--form-bg);
+  display: flex;
+}
+
+.form {
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.type-message {
+  width: 100%;
+  padding: 0 0 0 10px;
+  background-color: white;
+  border: none;
+}
+
+.send-button {
+  margin-left: 15px;
+  padding: 0 20px;
+  color: white;
+  background-color: var(--send-button-bg);
+  text-align: center;
+  border: none;
+}
+
+.form-image {
+  font-size: 12px;
+  background-color: lightblue;
+  color: white;
+  padding: 12px;
+  width: 60px;
+  text-align: center;
+  margin: 5px 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+
+/*
+＊＊「messages.css 」は何のためにある？＊＊
+これは、メッセージ関連のページ（今作っているチャット画面など）専用のスタイルを書くためのファイルです。
+
+Railsでは、rails g controller Messages のようにコントローラーを作成すると、
+それに対応するCSSファイル（app/assets/stylesheets/messages.css）も自動で生成される仕組みになっています。
+
+・application.css: サイト全体で共通して使いたいスタイル（例: box-sizing の設定、
+ヘッダーやフッターの基本デザインなど）を書きます。
+
+・messages.css: MessagesController が管轄するビュー（index.html.erb など）にだけ適用したいといった、
+ページ固有のスタイルを書きます。
+
+.wrapper や .side-bar のようなスタイルは、
+まさにこのチャット画面のためのものなので、messages.css に書くのが最適です。
+*/
+
+
+/*
+「index.html.erb」ファイルのCSSは「messages.css」で設定して、
+その設定は「index.html.erb」内にある部分テンプレートファイルの中のレイアウトにも引き継がれる.
+　　　　↓　　　↓　　　↓　　　↓
+＊＊なぜスタイルは引き継がれるのか？＊＊
+１．サーバーでの処理（Rails）: あなたがページにアクセスすると、まずRailsサーバーが動きます。
+サーバーは index.html.erb を読み込み、<%= render "side_bar" %> や <%= render "main_chat" %> を見つけると、
+それぞれのパーシャルファイルの中身をその場所に合体させます。そして、1枚の完成したHTMLファイルを生成します。
+
+２．ブラウザでの処理: ブラウザは、サーバーから送られてきたその1枚の完成したHTMLと、
+application.css にまとめられたCSSファイルを受け取ります。ブラウザから見れば、元々ファイルが分かれていたことなど知る由もなく、
+単純にHTMLの構造（どのクラスがどの要素の子になっているか）を見て、CSSを適用していきます。
+
+したがって、_main_chat.html.erb の中身は <div class="main-chat"> の子要素として扱われるため、
+「.main-chat」に適用されたスタイル（幅や背景色など）の影響を完全に受けるのです。
+*/
+
+
+
+
+/**/
+/**/
